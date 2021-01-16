@@ -1,6 +1,6 @@
 #!/bin/bash
 
-start="/home/minecraft/1.14/start.sh"
+start="/home/minecraft/1.16.4/start.sh"
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -18,7 +18,9 @@ screen -S minecraft -X stuff "stop^M"
 ;;
 restart)
 echo "Restart Minecraft Server"
-screen -S minecraft -X stuff "restart^M"
+screen -S minecraft -X stuff "stop^M"
+sleep 5
+script /dev/null -qc "screen -AmdS minecraft ${start} && sleep 2"
 ;;
 open)
 echo -e "${BLUE}Open Minecraft Shell. You can detach it with Strg + A + D${NC}"
@@ -49,4 +51,3 @@ fi
     echo -e "${BLUE}available commands: ${NC}start/stop/restart/status/open"
 ;;
 esac
-
